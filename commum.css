@@ -169,26 +169,47 @@
   
    
   /* Faixa roxa */
-  .faixa-roxa {
+  .faixa-roxa-final {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     background-color: #a259ff;
-    padding: 30px;
     color: white;
-    flex-wrap: wrap;
+    padding: 40px 20px;
+    text-align: center;
   }
-   
+  
+  .texto-faixa {
+    margin-bottom: 20px;
+    max-width: 600px;
+  }
+  
   .texto-faixa p {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: bold;
+    margin-bottom: 8px;
   }
-   
+  
   .texto-faixa span {
     font-size: 16px;
   }
-   
-  .faixa-roxa img {
-    width: 200px;
-    margin-top: 10px;
+  
+  .imagem-faixa img {
+    width: 180px;
+    max-width: 100%;
   }
+  
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .faixa-roxa-final {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .imagem-faixa img {
+      width: 160px;
+    }
+  }
+  
+
