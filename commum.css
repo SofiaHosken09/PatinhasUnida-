@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+   
+  body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+  }
+   
+  /* Cabeçalho */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+  }
+   
+  .logo {
+    font-weight: bold;
+    color: #6e2da8;
+  }
+   
+  nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+  }
+   
+  .busca {
+    display: flex;
+    align-items: center;
+  }
+   
+  .busca input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+   
+  .seta {
+    margin-left: 5px;
+    color: #6e2da8;
+    font-size: 18px;
+  }
+   
+  .botoes button {
+    margin-left: 10px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+   
+  .anunciar {
+    background-color: #6e2da8;
+  }
+   
+  .entrar {
+    background-color: #a259ff;
+  }
+   
+  /* Seção Adote */
+  .adote-bloco {
+    display: flex;
+    align-items: center;
+    padding: 40px 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 100px;
+  }
+  
+  .adote-card {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .container-roxo {
+    position: relative;
+    width: 380px;
+    height: 320px; /* altura reduzida */
+    background-color: #a259ff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: visible; /* permite imagem sair da div */
+  }
+  
+  .meio-circulo {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #caa8ff;
+    border-bottom-left-radius: 150px;
+    border-bottom-right-radius: 150px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    z-index: 1;
+  }
+  
+  .texto-acredite {
+    position: absolute;
+    top: 15px;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    z-index: 2;
+  }
+  
+  .img-pagina {
+    width: 90%;
+    height: auto;
+    position: relative;
+    z-index: 3;
+    margin-bottom: -135px; /* transbordando a imagem para fora */
+  }
+  
+  .texto-adote {
+    max-width: 500px;
+  }
+  
+  .texto-adote p {
+    font-size: 40px;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .texto-adote strong {
+    color: #6e2da8;
+  }
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .adote-bloco {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .texto-adote p {
+      font-size: 22px;
+    }
+  
+    .container-roxo {
+      width: 90%;
+      height: 200px;
+    }
+  
+    .texto-acredite {
+      font-size: 22px;
+    }
+  
+    .img-pagina {
+      width: 80%;
+      margin-bottom: -30px;
+    }
+  }
+  
+   
+  /* Faixa roxa */
+  .faixa-roxa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a259ff;
+    padding: 30px;
+    color: white;
+    flex-wrap: wrap;
+  }
+   
+  .texto-faixa p {
+    font-size: 26px;
+    font-weight: bold;
+  }
+   
+  .texto-faixa span {
+    font-size: 16px;
+  }
+   
+  .faixa-roxa img {
+    width: 200px;
+    margin-top: 10px;
+  }
