@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro e Login - Patinhas Unidas</title>
+  <link rel="stylesheet" href="../css/cadastro-usuario.css" />
+    <link rel="stylesheet" href="../commum.css" />
+  <!-- Firebase compat -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+  <script defer src="../firebase-config.js"></script>
+  <script defer src="../js/cadastro-usuario.js"></script>
+</head>
+<body>
+ <header>
+    <a href="../index.html"><div class="logo"><img src="../img/Group 1 3.png" alt="">     PATINHAS UNIDAS       <img src="../img/Group 1 3.png" alt="">  </div></a>
+    
+    <nav>
+      <a href="#">Doações</a>
+      <a href="#">Encontre seu PET</a>
+      <a href="#">Sobre nós</a>
+    </nav>
+   
+    
+  </header>
+  <div class="auth-container">
+    <div class="tabs">
+      <button id="tab-register">Cadastro</button>
+      <button id="tab-login">Login</button>
+    </div>
+    <form id="form-register" class="active" onsubmit="event.preventDefault(); cadastrarUsuario();">
+      <input id="reg-nome" type="text" placeholder="Nome completo" required>
+      <input id="reg-email" type="email" placeholder="Email" required>
+      <input id="reg-telefone" type="tel" placeholder="Telefone" required oninput="mascaraTelefone(this)">
+      <input id="reg-cidade" type="text" placeholder="Cidade" required>
+      <input id="reg-foto" type="file" accept="image/*" required>
+      <input id="reg-senha" type="password" placeholder="Senha" required>
+      <input id="reg-conf" type="password" placeholder="Confirme a senha" required>
+      <div id="reg-feedback" class="feedback"></div>
+      <button type="submit">Cadastrar</button>
+    </form>
+    <form id="form-login" onsubmit="event.preventDefault(); logarUsuario();">
+      <input id="log-email" type="email" placeholder="Email" required>
+      <input id="log-senha" type="password" placeholder="Senha" required>
+      <div id="log-feedback" class="feedback"></div>
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+</body>
+</html>

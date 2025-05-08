@@ -1,0 +1,89 @@
+body { 
+    font-family: Montserrat,
+     sans-serif; 
+     margin:0; 
+     padding:0; 
+     background:#f5f5f5; }
+.header {
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    padding:20px; 
+    background:#fff;
+     box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+.profile { 
+     display:flex; 
+     align-items:center; 
+    }
+.profile-img { width:50px; 
+    height:50px; 
+    border-radius:50%;
+     object-fit:cover; 
+     margin-right:10px; 
+    }
+.profile-name { font-size:18px; 
+    color:#333;
+ }
+.btn-add { padding:10px 20px; 
+    background:#6e2da8; 
+    color:#fff; 
+    border:none; 
+    border-radius:5px; 
+    cursor:pointer; 
+}
+.cards-container { display:grid; 
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+     gap:20px; 
+     padding:20px; 
+    }
+.card { background:#fff;
+     border-radius:8px;
+      overflow:hidden; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.1); 
+    }
+.card img {
+     width:100%; 
+    height:200px;
+     object-fit:cover; 
+    }
+.card-info { 
+    padding:15px;
+ }
+.card-info h3 { 
+    margin:0 0 10px; 
+    color:#6e2da8;
+ }
+.card-info p { margin:0 0 15px; 
+    color:#555;
+ }
+.card-info button { 
+    padding:8px 15px;
+    background:#a259ff; 
+    color:#fff; 
+    border:none;
+    border-radius:5px; cursor:pointer; }
+
+.pet-form {
+    max-width:400px;
+     margin:40px auto;
+      background:#fff;
+       padding:20px;
+        border-radius:8px;
+         box-shadow:0 2px 8px rgba(0,0,0,0.1);
+          display:flex; flex-direction:column; 
+        }
+.pet-form input, .pet-form textarea { 
+    margin-bottom:15px;
+     padding:10px;
+      border:1px solid #ccc;
+       border-radius:5px;
+        font-size:16px;
+     }
+.pet-form button { padding:12px;
+     background:#6e2da8;
+      color:#fff;
+       border:none;
+        border-radius:6px;
+         font-size:16px;
+          cursor:pointer; 
+        }

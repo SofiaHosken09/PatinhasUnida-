@@ -1,0 +1,104 @@
+/* css/pet.css */
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+}
+
+.pet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.pet-header h2 {
+  color: #6e2da8;
+  font-size: 24px;
+  margin: 0;
+}
+
+.pet-header button {
+  background: #6e2da8;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.pet-header button:hover {
+  background: #a259ff;
+}
+
+.pet-form {
+  max-width: 500px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-form label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.pet-form input,
+.pet-form textarea {
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.pet-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.pet-form button {
+  background-color: #6e2da8;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pet-form button:hover {
+  background-color: #a259ff;
+}
+
+.feedback {
+  color: red;
+  font-size: 14px;
+  min-height: 18px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 600px) {
+  .pet-form {
+    margin: 20px;
+    padding: 20px;
+  }
+  .pet-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

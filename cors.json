@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["https://laughing-space-fiesta-7jgqp7j5qjv2x9w9-5501.app.github.dev"],
+    "method": ["GET", "POST", "PUT", "HEAD", "OPTIONS"],
+    "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"],
+    "maxAgeSeconds": 3600
+  }
+]
