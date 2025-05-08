@@ -1,0 +1,38 @@
+[debug] [2025-05-08T23:56:50.128Z] ----------------------------------------------------------------------
+[debug] [2025-05-08T23:56:50.130Z] Command:       /usr/local/share/nvm/versions/node/v20.19.0/bin/node /workspaces/PatinhasUnida-/node_modules/.bin/firebase init hosting
+[debug] [2025-05-08T23:56:50.130Z] CLI Version:   14.3.0
+[debug] [2025-05-08T23:56:50.130Z] Platform:      linux
+[debug] [2025-05-08T23:56:50.130Z] Node Version:  v20.19.0
+[debug] [2025-05-08T23:56:50.130Z] Time:          Thu May 08 2025 23:56:50 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-05-08T23:56:50.131Z] Env Overrides: GITHUB_API_URL, GITHUB_API_URL
+[debug] [2025-05-08T23:56:50.131Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-08T23:56:50.134Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T23:56:50.135Z] > authorizing via signed-in user (sofiahosken09@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /workspaces/PatinhasUnida-
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-05-08T23:56:50.157Z] Checked if tokens are valid: true, expires at: 1746752008166
+[debug] [2025-05-08T23:56:50.157Z] Checked if tokens are valid: true, expires at: 1746752008166
+[debug] [2025-05-08T23:56:50.160Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-05-08T23:56:50.512Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-05-08T23:56:50.512Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
