@@ -1,0 +1,8 @@
+app.post('/api/upload-imagem', upload.single('foto'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: 'Nenhum arquivo de imagem enviado.' });
+    }
+
+    const caminhoImagem = `/uploads/${req.file.filename}`;
+    res.json({ caminho: caminhoImagem }); // <--- Aqui a resposta é enviada como JSON
+});

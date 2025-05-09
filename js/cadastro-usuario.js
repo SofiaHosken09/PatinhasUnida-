@@ -99,3 +99,49 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   };
 });
+window.entrarComGoogle = function() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then(result => {
+      const user = result.user;
+      const uid = user.uid;
+
+      // Verifica se o usuário já está salvo no Firestore
+      return firebase.firestore().collection('usuarios').doc(uid).get()
+        .then(doc => {
+          if (!doc.exists) {
+            return firebase.firestore().collection('usuarios').doc(uid).set({
+              nome: user.displayName,
+              email: user.email,
+              telefone: '',
+              cidade: '',
+              fotoURL: user.photoURL,
+              uid: uid
+            });
+          }
+        });
+    })
+    .then(() => {
+      alert('Login com Google bem-sucedido!');
+      window.location.href = 'home.html';
+    })
+    .catch(error => {
+      alert('Erro no login com Google: ' + error.message);
+      console.error(error);
+    });
+};
+
+// Redefinir senha
+window.redefinirSenha = function() {
+  const email = prompt('Digite seu e-mail para redefinir a senha:');
+  if (!email) return;
+
+  firebase.auth().sendPasswordResetEmail(email)
+    .then(() => {
+      alert('E-mail de redefinição enviado!');
+    })
+    .catch(error => {
+      alert('Erro ao enviar e-mail: ' + error.message);
+      console.error(error);
+    });
+};
