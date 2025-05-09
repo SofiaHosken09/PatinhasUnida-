@@ -77,7 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
               .set({ nome, email, telefone, cidade, fotoURL: url, uid })
           );
       })
-      .then(() => alert('Cadastro realizado com sucesso!'))
+     .then(() => {
+      alert('Cadastro realizado com sucesso!');
+      window.location.href = '../html/home.html';
+    })
+      
       .catch(e => {
         fb.textContent = e.message;
         console.error(e);
@@ -92,7 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
     fb.textContent = '';
 
     firebase.auth().signInWithEmailAndPassword(email, senha)
-      .then(() => alert('Login efetuado com sucesso!'))
+     .then(() => {
+      alert('Login realizado com sucesso!');
+      window.location.href = '../html/home.html';
+    })
       .catch(e => {
         fb.textContent = e.message;
         console.error(e);
@@ -123,7 +130,8 @@ window.entrarComGoogle = function() {
     })
     .then(() => {
       alert('Login com Google bem-sucedido!');
-      window.location.href = 'home.html';
+      window.location.href = '../html/home.html';
+     
     })
     .catch(error => {
       alert('Erro no login com Google: ' + error.message);
