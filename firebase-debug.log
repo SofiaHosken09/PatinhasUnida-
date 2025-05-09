@@ -36,3 +36,16 @@ Before we get started, keep in mind:
 [debug] [2025-05-08T23:56:50.160Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
 [debug] [2025-05-08T23:56:50.512Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
 [debug] [2025-05-08T23:56:50.512Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project patinhas-unidas-9bd96 (patinhas-unidas) 
+[info] 
+=== Hosting Setup
+[debug] [2025-05-09T00:15:06.109Z] Checked if tokens are valid: true, expires at: 1746752008166
+[debug] [2025-05-09T00:15:06.109Z] Checked if tokens are valid: true, expires at: 1746752008166
+[debug] [2025-05-09T00:15:06.109Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/patinhas-unidas-9bd96 [none]
+[debug] [2025-05-09T00:15:06.466Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/patinhas-unidas-9bd96 200
+[debug] [2025-05-09T00:15:06.466Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/patinhas-unidas-9bd96 {"projectId":"patinhas-unidas-9bd96","projectNumber":"1007242481875","displayName":"patinhas-unidas","name":"projects/patinhas-unidas-9bd96","resources":{"hostingSite":"patinhas-unidas-9bd96"},"state":"ACTIVE","etag":"1_3493dc25-b38d-4e48-b4ce-f0c8ba120788"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
