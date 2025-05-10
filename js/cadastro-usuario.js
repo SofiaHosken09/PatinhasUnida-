@@ -1,4 +1,13 @@
-// js/auth.js
+// Importando os serviços do Firebase
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import { app } from '../firebase-config.js';
+
+// Inicializando os serviços do Firebase
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1) Seleção de abas e formulários
@@ -57,31 +66,27 @@ document.addEventListener('DOMContentLoaded', () => {
     fb.textContent = '';
 
     // validações básicas
-    if (!foto)       { fb.textContent = 'Selecione uma foto.';       return; }
-    if (senha !== conf) { fb.textContent = 'Senhas não conferem.';      return; }
-    if (senha.length < 6) { fb.textContent = 'Senha mínimo 6 caracteres.'; return; }
+    if (!foto) { fb.textContent = 'Selecione uma foto.'; return; }
+    if (senha !== conf) { fb.textContent = 'Senhas não conferem.'; return; }
+    if (senha.length < 6) { fb.textContent = 'Senha mínima 6 caracteres.'; return; }
 
     // cria usuário no Firebase Auth
-    firebase.auth().createUserWithEmailAndPassword(email, senha)
+    createUserWithEmailAndPassword(auth, email, senha)
       .then(cred => {
         const uid = cred.user.uid;
         // upload de foto
-        const storageRef = firebase.storage().ref(`fotosPerfil/${uid}`);
-        return storageRef.put(foto)
-          .then(() => storageRef.getDownloadURL())
+        const storageRef = ref(storage, `fotosPerfil/${uid}`);
+        return uploadBytes(storageRef, foto)
+          .then(() => getDownloadURL(storageRef))
           .then(url =>
             // salva dados no Firestore
-            firebase.firestore()
-              .collection('usuarios')
-              .doc(uid)
-              .set({ nome, email, telefone, cidade, fotoURL: url, uid })
+            setDoc(doc(db, 'usuarios', uid), { nome, email, telefone, cidade, fotoURL: url, uid })
           );
       })
-     .then(() => {
-      alert('Cadastro realizado com sucesso!');
-      window.location.href = '../html/home.html';
-    })
-      
+      .then(() => {
+        alert('Cadastro realizado com sucesso!');
+        window.location.href = '../html/home.html';
+      })
       .catch(e => {
         fb.textContent = e.message;
         console.error(e);
@@ -95,43 +100,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const fb    = document.getElementById('log-feedback');
     fb.textContent = '';
 
-    firebase.auth().signInWithEmailAndPassword(email, senha)
-     .then(() => {
-      alert('Login realizado com sucesso!');
-      window.location.href = '../html/home.html';
-    })
+    signInWithEmailAndPassword(auth, email, senha)
+      .then(() => {
+        alert('Login realizado com sucesso!');
+        window.location.href = '../html/home.html';
+      })
       .catch(e => {
         fb.textContent = e.message;
         console.error(e);
       });
   };
 });
+
+// Login com Google
 window.entrarComGoogle = function() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider)
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
     .then(result => {
       const user = result.user;
       const uid = user.uid;
 
       // Verifica se o usuário já está salvo no Firestore
-      return firebase.firestore().collection('usuarios').doc(uid).get()
-        .then(doc => {
-          if (!doc.exists) {
-            return firebase.firestore().collection('usuarios').doc(uid).set({
-              nome: user.displayName,
-              email: user.email,
-              telefone: '',
-              cidade: '',
-              fotoURL: user.photoURL,
-              uid: uid
-            });
-          }
-        });
+      return getDoc(doc(db, 'usuarios', uid)).then(docSnap => {
+        if (!docSnap.exists()) {
+          return setDoc(doc(db, 'usuarios', uid), {
+            nome: user.displayName,
+            email: user.email,
+            telefone: '',
+            cidade: '',
+            fotoURL: user.photoURL,
+            uid: uid
+          });
+        }
+      });
     })
     .then(() => {
       alert('Login com Google bem-sucedido!');
       window.location.href = '../html/home.html';
-     
     })
     .catch(error => {
       alert('Erro no login com Google: ' + error.message);
@@ -144,7 +149,7 @@ window.redefinirSenha = function() {
   const email = prompt('Digite seu e-mail para redefinir a senha:');
   if (!email) return;
 
-  firebase.auth().sendPasswordResetEmail(email)
+  sendPasswordResetEmail(auth, email)
     .then(() => {
       alert('E-mail de redefinição enviado!');
     })

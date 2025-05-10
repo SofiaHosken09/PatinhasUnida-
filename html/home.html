@@ -8,25 +8,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script defer src="../firebase-config.js"></script>
-  <script defer>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Exemplo de dados do usuário logado
-      const userName = 'João Silva';
-      const photoURL = 'img/profile.jpg';
-      document.getElementById('user-name').textContent = userName;
-      document.getElementById('user-photo').src = photoURL;
-
-      // Botões de adoção
-      document.querySelectorAll('.card button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const petId = btn.dataset.id;
-          // lógica de confirmação, exibir alerta
-          alert(`Animal ${petId} marcado como adotado!`);
-        });
-      });
-    });
-  </script>
+ 
 </head>
 <body>
   <header class="header">
@@ -56,5 +38,7 @@
     </div>
     <!-- mais cards... -->
   </main>
+   <script defer src="../firebase-config.js"></script>
+  <script defer src="../js/home.js"></script>
 </body>
 </html>

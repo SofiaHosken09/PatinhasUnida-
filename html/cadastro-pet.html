@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro de Pet - Patinhas Unidas</title>
   <link rel="stylesheet" href="../css/cadastro-pet.css" />
-    <link rel="stylesheet" href="../commum.css" />
+  <link rel="stylesheet" href="../commum.css" />
 </head>
 <body>
   <header class="pet-header">
     <button onclick="location.href='home.html'">← Voltar</button>
     <h2>Cadastro de Animal para Adoção</h2>
   </header>
+
   <main class="pet-form">
-    <form id="form-pet" onsubmit="event.preventDefault(); cadastrarPet();">
+    <form id="form-pet">
       <label for="pet-nome">Nome</label>
       <input id="pet-nome" type="text" placeholder="Ex: Bolt" required />
 
@@ -46,17 +47,20 @@
     </form>
   </main>
 
-  <!-- Firebase SDK compat -->
+  <!-- Firebase SDKs (compat) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
-  <script defer src="../firebase-config.js"></script>
 
-  <script defer src="../js/cadastro-pet.js"></script>
+  <!-- Firebase config -->
+  <script type="module" src="../firebase-config.js"></script>
 
-   
- 
+  <!-- Cloudinary widget -->
+  <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+
+  <!-- Script principal -->
+  <script type="module" src="../js/cadastro-pet.js"></script>
 
 </body>
 </html>

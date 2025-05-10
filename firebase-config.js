@@ -1,4 +1,6 @@
-// Evite declarar 2 vezes
+// firebase-config.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAzOVYSc1x9pADmXmTwvXhUhOFwCeAFa3A",
   authDomain: "patinhas-unidas-9bd96.firebaseapp.com",
@@ -8,8 +10,6 @@ const firebaseConfig = {
   appId: "1:1007242481875:web:SEU_APP_ID"
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
-const db = firebase.firestore();
-const storage = firebase.storage();
+export { app };

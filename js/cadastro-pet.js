@@ -1,107 +1,67 @@
-async function cadastrarPet() {
-  try {
-    const user = firebase.auth().currentUser;
-    if (!user) {
-      alert('Você precisa estar logado.');
-      return;
-    }
-    const idDoador = user.uid;
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { app } from '../firebase-config.js';
 
-    const nome = document.getElementById('pet-nome').value.trim();
-    const especie = document.getElementById('pet-especie').value.trim();
-    const raca = document.getElementById('pet-raca').value.trim();
-    const idadeInput = document.getElementById('pet-idade');
-    const idade = idadeInput ? parseInt(idadeInput.value, 10) : 0;
-    const cor = document.getElementById('pet-cor').value.trim();
-    const pelagem = document.getElementById('pet-pelagem').value.trim();
-    const doencas = document.getElementById('pet-doencas').value.trim();
-    const descricao = document.getElementById('pet-desc').value.trim();
-    const fotoInput = document.getElementById('pet-foto');
-    const feedback = document.getElementById('pet-feedback');
-    if (feedback) {
-      feedback.textContent = '';
-    }
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-    if (!nome || !especie || !raca || isNaN(idade) || !cor || !pelagem || !doencas || !descricao || !fotoInput || !fotoInput.files || fotoInput.files.length === 0) {
-      if (feedback) {
-        feedback.textContent = 'Preencha todos os campos e selecione uma foto.';
-      } else {
-        alert('Preencha todos os campos e selecione uma foto.');
-      }
+// Garantir que o código só seja executado após o DOM estar completamente carregado
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('form-pet').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const fileInput = document.getElementById('pet-foto');
+    if (!fileInput || !fileInput.files[0]) {
+      alert("Nenhuma foto selecionada.");
       return;
     }
 
-    const foto = fotoInput.files[0];
-    const petId = Date.now().toString();
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('file', file);
+    formData.append('upload_preset', 'patinhas_upload');
 
-    // Solução alternativa (upload para um servidor local, se disponível)
+    let fotoURL = "";
+
     try {
-      const formData = new FormData();
-      formData.append('foto', foto);
-      const uploadResponse = await fetch('http://localhost:3000/upload', { // Assumindo um servidor local rodando
+      // Enviar imagem para o Cloudinary
+      const cloudinaryRes = await fetch('https://api.cloudinary.com/v1_1/dzfmswqki/image/upload', {
         method: 'POST',
-        body: formData,
+        body: formData
       });
 
-      if (!uploadResponse.ok) {
-        const errorData = await uploadResponse.json();
-        throw new Error(`Erro no upload da imagem para o servidor local: ${errorData.message || uploadResponse.statusText}`);
+      if (!cloudinaryRes.ok) {
+        throw new Error("Erro ao enviar imagem para o Cloudinary.");
       }
 
-      const { caminho } = await uploadResponse.json();
+      const cloudinaryData = await cloudinaryRes.json();
+      fotoURL = cloudinaryData.secure_url;
 
-      await firebase.firestore().collection('animais').doc(petId).set({
-        id: petId,
-        idDoador,
-        nome,
-        especie,
-        raca,
-        idade,
-        cor,
-        pelagem,
-        doencas,
-        descricao,
-        foto: caminho, // Salva o caminho local
-        foiAdotado: false
+      // Verificar se o usuário está autenticado
+      const user = auth.currentUser;
+      if (!user) throw new Error("Usuário não autenticado.");
+
+      // Adicionar documento no Firestore
+      const docRef = await addDoc(collection(db, "animais"), {
+        nome: document.getElementById("nome").value,
+        especie: document.getElementById("especie").value,
+        raca: document.getElementById("raca").value,
+        idade: parseInt(document.getElementById("idade").value),
+        pelagem: document.getElementById("pelagem").value,
+        cor: document.getElementById("cor").value,
+        descricao: document.getElementById("descricao").value,
+        doencas: document.getElementById("doencas").value,
+        foiAdotado: false,
+        foto: fotoURL,
+        idDoador: user.uid
       });
 
-      alert('Pet cadastrado com sucesso (imagem salva localmente)!');
-      window.location.href = 'home.html';
-      return;
+      alert("Pet cadastrado com sucesso!");
 
-    } catch (localUploadError) {
-      console.warn("Falha ao usar o servidor local, tentando Firebase Storage:", localUploadError);
-      // Se o upload local falhar, tenta o Firebase Storage (com possível problema de CORS)
-      const storageRef = firebase.storage().ref(`animais/${petId}`);
-      await storageRef.put(foto);
-      const url = await storageRef.getDownloadURL();
-
-      await firebase.firestore().collection('animais').doc(petId).set({
-        id: petId,
-        idDoador,
-        nome,
-        especie,
-        raca,
-        idade,
-        cor,
-        pelagem,
-        doencas,
-        descricao,
-        foto: url,
-        foiAdotado: false
-      });
-
-      alert('Pet cadastrado com sucesso (imagem salva no Firebase Storage)!');
-      window.location.href = 'home.html';
+    } catch (error) {
+      console.error("Erro ao cadastrar pet:", error);
+      alert("Erro ao cadastrar pet. Verifique o console.");
     }
-
-  } catch (err) {
-    console.error(err);
-    const feedback = document.getElementById('pet-feedback');
-    if (feedback) {
-      feedback.textContent = 'Erro ao cadastrar: ' + err.message;
-    } else {
-      alert('Erro ao cadastrar: ' + err.message);
-    }
-  }
-}
+  });
+});
