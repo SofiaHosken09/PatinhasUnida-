@@ -1,10 +1,11 @@
 // home.js
-// Esse script gerencia o perfil do usuário e o dashboard de animais para adoção e adotados
+// Esse script gerencia o perfil do usuário, logout e o dashboard de animais para adoção e adotados
 
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, collection, query, where, getDocs, doc, updateDoc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { app } from '../firebase-config.js';
 
+// Inicialização
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -16,12 +17,24 @@ const UPLOAD_PRESET = 'patinhas_upload';
 const userPhotoEl = document.getElementById('user-photo');
 const userNameEl = document.getElementById('user-name');
 const userTelefoneEl = document.getElementById('user-telefone');
+const logoutBtn = document.getElementById('logout-btn');
 const editModal = document.getElementById('edit-modal');
 const editForm = document.getElementById('edit-profile-form');
 const animaisParaAdocaoContainer = document.getElementById('animais-para-adocao');
 const animaisAdotadosContainer = document.getElementById('animais-adotados');
 
 let currentUserUID = null;
+
+// Logout
+window.logout = async function() {
+  try {
+    await signOut(auth);
+    window.location.href = '../index.html';
+  } catch (err) {
+    console.error('Erro ao fazer logout:', err);
+    alert('Não foi possível sair. Tente novamente.');
+  }
+};
 
 // Funções de modal
 window.openEditModal = () => editModal.classList.remove('hidden');
@@ -49,6 +62,7 @@ onAuthStateChanged(auth, async user => {
     return;
   }
 
+  if (logoutBtn) logoutBtn.classList.remove('hidden');
   currentUserUID = user.uid;
 
   // Carregar dados do usuário
@@ -59,14 +73,12 @@ onAuthStateChanged(auth, async user => {
     userPhotoEl.src = data.fotoURL || 'default-profile.png';
     userNameEl.textContent = data.nome;
     userTelefoneEl.textContent = data.telefone;
-    // Preenche formulário de edição
     document.getElementById('edit-nome').value = data.nome;
     document.getElementById('edit-telefone').value = data.telefone;
   }
 
-  // Carregar animais para adoção
+  // Carregar animais para adoção e adotados
   await carregarAnimais(false);
-  // Carregar animais adotados
   await carregarAnimais(true);
 });
 
@@ -97,7 +109,6 @@ async function carregarAnimais(adotados) {
   });
 
   if (!adotados) {
-    // Adiciona eventos para marcar como adotado
     container.querySelectorAll('.btn-adotar').forEach(btn => {
       btn.addEventListener('click', async () => {
         const petId = btn.dataset.id;
@@ -135,7 +146,6 @@ editForm.addEventListener('submit', async e => {
     if (fotoURL) updateData.fotoURL = fotoURL;
     await setDoc(userRef, updateData, { merge: true });
 
-    // Atualiza UI
     userNameEl.textContent = nome;
     userTelefoneEl.textContent = telefone;
     if (fotoURL) userPhotoEl.src = fotoURL;
@@ -145,4 +155,4 @@ editForm.addEventListener('submit', async e => {
     console.error(err);
     alert('Erro ao atualizar perfil: ' + err.message);
   }
-} );
+});
