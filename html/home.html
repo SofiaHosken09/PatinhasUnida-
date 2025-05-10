@@ -1,27 +1,57 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home Doador - Patinhas Unidas</title>
   <link rel="stylesheet" href="../css/home.css" />
-  <!-- Firebase SDK compatível -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <header class="header">
     <div class="profile">
-      <img id="user-photo" alt="Foto de Perfil" class="profile-img" />
-      <span id="user-name" class="profile-name"></span>
+      <img id="user-photo" alt="Foto de Perfil" class="profile-img"/>
+      <div class="profile-info">
+        <h2 id="user-name"></h2>
+        <p id="user-telefone"></p>
+        <button class="btn-edit" onclick="openEditModal()"><i class="fas fa-edit"></i> Editar Perfil</button>
+      </div>
     </div>
-    <button class="btn-add" onclick="location.href='cadastro-pet.html'">Cadastrar Animal</button>
+    <button class="btn-primary" onclick="location.href='cadastro-pet.html'">
+      <i class="fas fa-plus-circle"></i> Cadastrar Animal
+    </button>
   </header>
-  
-  <main class="cards-container">
-    <!-- Os cards de pets serão inseridos aqui dinamicamente -->
+
+  <main class="dashboard">
+    <section class="dashboard-section">
+      <h3>Animais para Adoção</h3>
+      <div id="animais-para-adocao" class="cards-container">
+        <!-- Cards de animais para adoção -->
+      </div>
+    </section>
+
+    <section class="dashboard-section">
+      <h3>Animais Adotados</h3>
+      <div id="animais-adotados" class="cards-container">
+        <!-- Cards de animais adotados -->
+      </div>
+    </section>
   </main>
-  
+
+  <!-- Modal de edição -->
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditModal()">&times;</span>
+      <h2>Editar Perfil</h2>
+      <form id="edit-profile-form">
+        <input type="text" id="edit-nome" placeholder="Nome" required />
+        <input type="text" id="edit-telefone" placeholder="Telefone" required oninput="mascaraTelefone(this)" />
+        <input type="file" id="edit-foto" accept="image/*" />
+        <button type="submit" class="btn-save">Salvar Alterações</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script type="module" src="../firebase-config.js"></script>
   <script type="module" src="../js/home.js"></script>
