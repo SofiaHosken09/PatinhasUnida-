@@ -43,19 +43,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!user) throw new Error("Usuário não autenticado.");
 
       // Adicionar documento no Firestore
-      const docRef = await addDoc(collection(db, "animais"), {
-        nome: document.getElementById("nome").value,
-        especie: document.getElementById("especie").value,
-        raca: document.getElementById("raca").value,
-        idade: parseInt(document.getElementById("idade").value),
-        pelagem: document.getElementById("pelagem").value,
-        cor: document.getElementById("cor").value,
-        descricao: document.getElementById("descricao").value,
-        doencas: document.getElementById("doencas").value,
-        foiAdotado: false,
-        foto: fotoURL,
-        idDoador: user.uid
-      });
+     const docRef = await addDoc(collection(db, "animais"), {
+      nome: document.getElementById("pet-nome").value,
+      especie: document.getElementById("pet-especie").value,
+      raca: document.getElementById("pet-raca").value,
+      idade: parseInt(document.getElementById("pet-idade").value),
+      pelagem: document.getElementById("pet-pelagem").value,
+      cor: document.getElementById("pet-cor").value,
+      descricao: document.getElementById("pet-desc").value,
+      doencas: document.getElementById("pet-doencas").value,
+      foiAdotado: false,
+      foto: fotoURL,
+      idDoador: user.uid
+    });
+
 
       alert("Pet cadastrado com sucesso!");
 
