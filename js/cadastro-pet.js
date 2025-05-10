@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const cloudinaryRes = await fetch('https://api.cloudinary.com/v1_1/dzfmswqki/image/upload', {
         method: 'POST',
         body: formData
-      });
+      });  //teste pra ver se to sonhando
 
       if (!cloudinaryRes.ok) {
         throw new Error("Erro ao enviar imagem para o Cloudinary.");
