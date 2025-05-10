@@ -4,11 +4,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home Doador - Patinhas Unidas</title>
   <link rel="stylesheet" href="../css/home.css" />
-  <!-- Firebase SDK compat -->
+  <!-- Firebase SDK compatível -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
- 
 </head>
 <body>
   <header class="header">
@@ -18,27 +17,13 @@
     </div>
     <button class="btn-add" onclick="location.href='cadastro-pet.html'">Cadastrar Animal</button>
   </header>
+  
   <main class="cards-container">
-    <!-- Exemplo de card -->
-    <div class="card">
-      <img src="img/pet1.jpg" alt="Pet 1" />
-      <div class="card-info">
-        <h3>Rex</h3>
-        <p>Compartilhável e brincalhão, procura um lar amoroso.</p>
-        <button data-id="Rex">Adotado?</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="img/pet2.jpg" alt="Pet 2" />
-      <div class="card-info">
-        <h3>Luna</h3>
-        <p>Calma e carinhosa, adora companhia de crianças.</p>
-        <button data-id="Luna">Adotado?</button>
-      </div>
-    </div>
-    <!-- mais cards... -->
+    <!-- Os cards de pets serão inseridos aqui dinamicamente -->
   </main>
-   <script defer src="../firebase-config.js"></script>
-  <script defer src="../js/home.js"></script>
+  
+  <!-- Scripts -->
+  <script type="module" src="../firebase-config.js"></script>
+  <script type="module" src="../js/home.js"></script>
 </body>
 </html>
