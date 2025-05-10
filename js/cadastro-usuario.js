@@ -10,7 +10,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1) Seleção de abas e formulários
+  // 1) Seleção de abas e formulárioscc
   const tabRegister = document.getElementById('tab-register');
   const tabLogin    = document.getElementById('tab-login');
   const formRegister = document.getElementById('form-register');
