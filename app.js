@@ -19,7 +19,10 @@ function criarCardAnimal(animal) {
         <p class="card-text"><strong>Espécie:</strong> ${animal.especie}</p>
         <p class="card-text"><strong>Idade:</strong> ${animal.idade} anos</p>
         <p class="card-text"><strong>Descrição:</strong> ${animal.descricao}</p>
-        <button class="btn btn-info" onclick="verMaisInfo('${animal.id}')">Ver Mais Informações</button>
+        <button class="btn btn-info" onclick="window.location.href='../html/maisinfo.html?id=${animal.id}'">Ver Mais Informações</button>
+
+
+
       </div>
     </div>
   `;

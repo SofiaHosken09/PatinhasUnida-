@@ -1,0 +1,72 @@
+
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.animal-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.animal-card img.animal-foto {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.animal-card h2 {
+  margin-top: 0;
+  font-size: 26px;
+  color: #333;
+}
+
+.animal-card p {
+  margin: 8px 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+.doador-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.doador-foto {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #25D366;
+}
+
+.doador-info p {
+  margin: 0;
+  color: #444;
+}
+
+.btn-whatsapp {
+  display: inline-block;
+  margin-top: 15px;
+  background-color: #25D366;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe5d;
+}
