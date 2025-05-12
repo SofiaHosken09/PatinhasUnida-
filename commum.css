@@ -282,38 +282,6 @@
   font-size: 14px;
   color: #999;
 }
-/* Estilo para o botão "Ver Mais Informações" */
-.btn-info {
-  background-color: #6c757d; /* Cor de fundo cinza escuro */
-  color: #fff; /* Cor do texto */
-  border: none;
-  border-radius: 25px; /* Bordas arredondadas */
-  padding: 10px 20px; /* Espaciamento interno */
-  font-size: 14px; /* Tamanho da fonte */
-  font-weight: bold; /* Negrito */
-  text-transform: uppercase; /* Texto em maiúsculas */
-  cursor: pointer;
-  transition: all 0.3s ease; /* Transição suave para os efeitos */
-  width: 100%; /* Largura total do card */
-  display: block;
-  margin-top: 10px; /* Espaçamento superior */
-  text-align: center; /* Alinha o texto no centro */
-}
-
-.btn-info:hover {
-  background-color: #5a6268; /* Cor de fundo um pouco mais escura ao passar o mouse */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave ao passar o mouse */
-}
-
-.btn-info:focus {
-  outline: none; /* Remove a borda de foco padrão */
-  box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5); /* Borda de foco azul claro */
-}
-
-.btn-info:active {
-  background-color: #495057; /* Cor de fundo ainda mais escura quando pressionado */
-  transform: translateY(2px); /* Efeito de "pressionamento" */
-}
 
   /* Responsivo */
   @media (max-width: 768px) {

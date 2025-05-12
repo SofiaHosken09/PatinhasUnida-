@@ -43,9 +43,10 @@
       <input id="log-senha" type="password" placeholder="Senha" required>
       <div id="log-feedback" class="feedback"></div>
       <button type="submit">Entrar</button>
-      <button type="button" onclick="entrarComGoogle()">Entrar com Google</button>
-<button type="button" onclick="redefinirSenha()">Esqueci minha senha</button>
-
+      <div class="botoes-extra">
+      <button class="botao-google" type="button" onclick="entrarComGoogle()">Entrar com Google</button>
+<button class="botao-redefinir" type="button" onclick="redefinirSenha()">Esqueci minha senha</button>
+</div>
     </form>
   </div>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>

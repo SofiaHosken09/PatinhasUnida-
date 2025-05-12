@@ -55,3 +55,61 @@ form button:hover {
   min-height: 18px;
   margin-bottom: 10px;
 }
+.botao-google {
+  background-color: #ffffff;
+  color: #444;
+  border: 2px solid #4285f4;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px 0;
+}
+.botoes-extra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.botao-google {
+  background-color: #ffffff;
+  color: #444;
+  border: 2px solid #4285f4;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.botao-google:hover {
+  background-color: #4285f4;
+  color: #fff;
+}
+
+.botao-redefinir {
+  background-color: transparent;
+  color: #6e2da8;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s;
+  font-size: 14px;
+}
+
+.botao-redefinir:hover {
+  color: #4b1a85;
+}
