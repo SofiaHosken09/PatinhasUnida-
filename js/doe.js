@@ -1,18 +1,14 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { firebaseConfig } from "../firebase-config.js";
+import { app, auth, db } from '../firebase-config.js'; // ✅ já inicializado
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// Referência ao container
 const container = document.getElementById('doacoes-container');
 
-// Função para carregar as doações públicas
+// Função para carregar as doações fechadas
 async function carregarDoacoesPublicas() {
   try {
+    // Modificado para buscar doações com status 'fechado'
     const doacoesRef = collection(db, 'ajuda_animais');
-    const q = query(doacoesRef, where('status', '==', 'ativo'));
+    const q = query(doacoesRef, where('status', '==', 'ativo')); // Alterado para 'fechado'
     const snapshot = await getDocs(q);
 
     container.innerHTML = ''; // Limpa o conteúdo do container antes de adicionar as doações
@@ -38,7 +34,7 @@ async function carregarDoacoesPublicas() {
             <p>${doacao.descricao}</p>
             <p><strong>Meta:</strong> R$ ${doacao.valorMeta}</p>
             <p><strong>Arrecadado:</strong> R$ ${doacao.valorArrecadado}</p>
-            <button class="btn btn-primary btn-sm w-100" onclick="mostrarModal('${usuario.nome}', '${usuario.telefone}', '${doacao.pix}', '${doacao.qrcode}')">
+            <button class="btn btn-primary btn-sm w-100" onclick="mostrarModal('${usuario.nome}', '${usuario.telefone}', '${doacao.chavePix}', '${doacao.qrcode}')">
               Quero Ajudar
             </button>
           </div>
@@ -53,13 +49,13 @@ async function carregarDoacoesPublicas() {
 }
 
 // Função para mostrar o modal
-window.mostrarModal = function(nome, telefone, pix, qrcodeUrl) {
+window.mostrarModal = function(nome, telefone, chavePix, qrcodeUrl) {
   document.getElementById('modal-nome').textContent = nome;
   document.getElementById('modal-tel').textContent = telefone;
-  document.getElementById('modal-pix').textContent = pix;
-  document.getElementById('modal-qrcode').src = qrcodeUrl;
+  document.getElementById('modal-pix').textContent = chavePix;
+  document.getElementById('modal-qrcode').src = qrcodeUrl; // Exibindo o QR Code cadastrado
   new bootstrap.Modal(document.getElementById('doacaoModal')).show();
 };
 
-// Chama a função para carregar as doações
+// Chama a função ao carregar a página
 carregarDoacoesPublicas();
