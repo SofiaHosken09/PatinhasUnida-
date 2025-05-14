@@ -1,19 +1,14 @@
-// home.js
-// Esse script gerencia o perfil do usuário, logout e o dashboard de animais para adoção e adotados
-
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, collection, query, where, getDocs, doc, updateDoc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { app } from '../firebase-config.js';
 
-// Inicialização
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Configuração do Cloudinary
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dzfmswqki/image/upload';
 const UPLOAD_PRESET = 'patinhas_upload';
 
-// Seletores DOM
+// Elementos DOM
 const userPhotoEl = document.getElementById('user-photo');
 const userNameEl = document.getElementById('user-name');
 const userTelefoneEl = document.getElementById('user-telefone');
@@ -22,11 +17,13 @@ const editModal = document.getElementById('edit-modal');
 const editForm = document.getElementById('edit-profile-form');
 const animaisParaAdocaoContainer = document.getElementById('animais-para-adocao');
 const animaisAdotadosContainer = document.getElementById('animais-adotados');
+const doacoesAbertasContainer = document.getElementById('doacoes-abertas');
+const doacoesFechadasContainer = document.getElementById('doacoes-fechadas');
 
 let currentUserUID = null;
 
 // Logout
-window.logout = async function() {
+window.logout = async function () {
   try {
     await signOut(auth);
     window.location.href = '../index.html';
@@ -36,12 +33,12 @@ window.logout = async function() {
   }
 };
 
-// Funções de modal
+// Modais
 window.openEditModal = () => editModal.classList.remove('hidden');
 window.closeEditModal = () => editModal.classList.add('hidden');
 
-// Máscara de telefone usada no editForm
-window.mascaraTelefone = function(campo) {
+// Máscara de telefone
+window.mascaraTelefone = function (campo) {
   let valor = campo.value.replace(/\D/g, '');
   if (valor.length > 11) valor = valor.slice(0, 11);
   if (valor.length > 10) {
@@ -55,7 +52,18 @@ window.mascaraTelefone = function(campo) {
   }
 };
 
-// Carrega perfil e listas ao autenticar
+// Abas de doações
+document.getElementById('aba-abertas').addEventListener('click', () => trocarAbaDoacao(true));
+document.getElementById('aba-fechadas').addEventListener('click', () => trocarAbaDoacao(false));
+
+function trocarAbaDoacao(mostrarAbertas) {
+  document.getElementById('aba-abertas').classList.toggle('active', mostrarAbertas);
+  document.getElementById('aba-fechadas').classList.toggle('active', !mostrarAbertas);
+  doacoesAbertasContainer.classList.toggle('hidden', !mostrarAbertas);
+  doacoesFechadasContainer.classList.toggle('hidden', mostrarAbertas);
+}
+
+// Ao autenticar
 onAuthStateChanged(auth, async user => {
   if (!user) {
     window.location.href = 'login.html';
@@ -65,7 +73,7 @@ onAuthStateChanged(auth, async user => {
   if (logoutBtn) logoutBtn.classList.remove('hidden');
   currentUserUID = user.uid;
 
-  // Carregar dados do usuário
+  // Carregar perfil
   const userDocRef = doc(db, 'usuarios', currentUserUID);
   const userSnap = await getDoc(userDocRef);
   if (userSnap.exists()) {
@@ -77,12 +85,12 @@ onAuthStateChanged(auth, async user => {
     document.getElementById('edit-telefone').value = data.telefone;
   }
 
-  // Carregar animais para adoção e adotados
   await carregarAnimais(false);
   await carregarAnimais(true);
+  await carregarDoacoes(); // <-- Adicionado aqui!
 });
 
-// Função para carregar animais
+// Carregar animais
 async function carregarAnimais(adotados) {
   const col = collection(db, 'animais');
   const q = query(col, where('idDoador', '==', currentUserUID), where('foiAdotado', '==', adotados));
@@ -121,7 +129,52 @@ async function carregarAnimais(adotados) {
   }
 }
 
-// Submissão do formulário de edição
+// Carregar doações
+async function carregarDoacoes() {
+  const col = collection(db, 'ajuda_animais');
+  const q = query(col, where('idDoador', '==', currentUserUID));
+  const snapshot = await getDocs(q);
+
+  doacoesAbertasContainer.innerHTML = '';
+  doacoesFechadasContainer.innerHTML = '';
+
+  snapshot.forEach(docSnap => {
+    const doacao = docSnap.data();
+    const docID = docSnap.id;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${doacao.foto}" alt="${doacao.nomeAnimal}">
+      <h4>${doacao.nomeAnimal}</h4>
+      <p>${doacao.descricao}</p>
+      <p><strong>Meta:</strong> R$${doacao.valorMeta}</p>
+      <p><strong>Arrecadado:</strong> R$${doacao.valorArrecadado}</p>
+      <button class="btn-toggle" data-id="${docID}" data-status="${doacao.status}">
+        ${doacao.status === 'ativo' ? 'Fechar Doação' : 'Reabrir Doação'}
+      </button>
+    `;
+
+    if (doacao.status === 'ativo') {
+      doacoesAbertasContainer.appendChild(card);
+    } else {
+      doacoesFechadasContainer.appendChild(card);
+    }
+  });
+
+  document.querySelectorAll('.btn-toggle').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.id;
+      const statusAtual = btn.dataset.status;
+      const novoStatus = statusAtual === 'ativo' ? 'fechado' : 'ativo';
+
+      await updateDoc(doc(db, 'ajuda_animais', id), { status: novoStatus });
+      carregarDoacoes();
+    });
+  });
+}
+
+// Submissão do formulário
 editForm.addEventListener('submit', async e => {
   e.preventDefault();
 

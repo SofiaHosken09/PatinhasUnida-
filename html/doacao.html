@@ -1,0 +1,51 @@
+<!-- html/doacao.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Solicitar Ajuda para Animal</title>
+  <link rel="stylesheet" href="../css/doacao.css" />
+   <link rel="stylesheet" href="../commum.css" />
+</head>
+<body>
+    <header>
+    <a href="../html/home.html"><div class="logo"><img src="../img/Group 1 3.png" alt="">     PATINHAS UNIDAS       <img src="../img/Group 1 3.png" alt="">  </div></a>
+    
+    <nav>
+   
+ 
+    </nav>
+   
+    
+  </header>
+  <div class="container">
+    <h2>Solicitar ajuda para um animal</h2>
+    <!-- Corrigido: ID do formulário compatível com o JS -->
+    <form id="form-ajuda">
+      <label>Nome do Animal</label>
+      <input type="text" id="nomeAnimal" required />
+
+      <label>Descrição do Motivo</label>
+      <textarea id="descricao" required></textarea>
+
+      <label>Meta de arrecadação (R$)</label>
+      <input type="number" id="valorMeta" required />
+
+      <label>Imagem do animal</label>
+      <input type="file" id="foto" accept="image/*" required />
+
+      <label>Chave Pix</label>
+      <input type="text" id="chavePix" required />
+
+      <button type="submit">Cadastrar Pedido</button>
+    </form>
+    <div id="msg"></div>
+  </div>
+
+  <!-- Firebase config (deve conter export `app`) -->
+  <script type="module" src="../firebase-config.js"></script>
+
+  <!-- JavaScript principal -->
+  <script type="module" src="../js/doacao.js"></script>
+</body>
+</html>

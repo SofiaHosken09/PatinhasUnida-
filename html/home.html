@@ -5,9 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home Doador - Patinhas Unidas</title>
   <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../commum.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <header>
+    <a href="../html/home.html"><div class="logo"><img src="../img/Group 1 3.png" alt="">     PATINHAS UNIDAS       <img src="../img/Group 1 3.png" alt="">  </div></a>
+    
+    <nav>
+   
+ 
+    </nav>
+   
+    
+  </header>
+  <br>
+  
   <header class="header">
     <div class="profile">
       <img id="user-photo" alt="Foto de Perfil" class="profile-img"/>
@@ -21,7 +34,11 @@
         <button class="btn-edit" onclick="openEditModal()"><i class="fas fa-edit"></i> Editar Perfil</button>
       </div>
     </div>
-    <button class="btn-primary" onclick="location.href='cadastro-pet.html'">
+  
+      <button class="btn-primary" onclick="location.href='doacao.html'">
+      <i class="fas fa-plus-circle"></i> Pedir doação
+    </button>
+      <button class="btn-primary" onclick="location.href='cadastro-pet.html'">
       <i class="fas fa-plus-circle"></i> Cadastrar Animal
     </button>
   </header>
@@ -39,7 +56,19 @@
       <div id="animais-adotados" class="cards-container">
         <!-- Cards de animais adotados -->
       </div>
+
+    
+
     </section>
+      <section class="dashboard-section">
+  <h3>Minhas Doações</h3>
+  <div class="tabs">
+    <button id="aba-abertas" class="tab-button active">Doações Abertas</button>
+    <button id="aba-fechadas" class="tab-button">Doações Fechadas</button>
+  </div>
+  <div id="doacoes-abertas" class="cards-container doacoes-tab active"></div>
+  <div id="doacoes-fechadas" class="cards-container doacoes-tab hidden"></div>
+</section>
   </main>
 
   <!-- Modal de edição -->
