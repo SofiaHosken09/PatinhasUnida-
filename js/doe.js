@@ -34,7 +34,7 @@ async function carregarDoacoesPublicas() {
             <p>${doacao.descricao}</p>
             <p><strong>Meta:</strong> R$ ${doacao.valorMeta}</p>
             <p><strong>Arrecadado:</strong> R$ ${doacao.valorArrecadado}</p>
-            <button class="btn btn-primary btn-sm w-100" onclick="mostrarModal('${usuario.nome}', '${usuario.telefone}', '${doacao.chavePix}', '${doacao.qrcode}')">
+            <button class="btn btn-primary btn-sm w-100" onclick="mostrarModal('${usuario.nome}', '${usuario.telefone}', '${doacao.qrCodeURL}', '${doacao.qrCodeURL}')">
               Quero Ajudar
             </button>
           </div>
