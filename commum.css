@@ -69,7 +69,14 @@
   .entrar {
     background-color: #a259ff;
   }
-   
+#btn-verm{
+    margin-left: 10px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    color: #a259ff;
+    cursor: pointer;
+}
   /* Seção Adote */
   .adote-bloco {
     display: flex;
